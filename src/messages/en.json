@@ -1,0 +1,84 @@
+{
+  "metadata": {
+    "title": "Pro Gineous - Best Web Hosting, Cloud Servers & Domain Registration 2026",
+    "description": "Launch your website today with Pro Gineous! Premium hosting from just $2/mo. ✅ 99.9% Uptime ✅ Free SSL ✅ 24/7 Support ✅ LiteSpeed Servers ✅ NVMe SSD. Get cloud hosting, VPS, dedicated servers & domain registration at the best prices in Egypt, Saudi Arabia, UAE & worldwide."
+  },
+  "nav": {
+    "home": "Home",
+    "domains": "Domains",
+    "hosting": "Hosting",
+    "servers": "Servers",
+    "support": "Support",
+    "login": "Login",
+    "register": "Sign Up"
+  },
+  "hero": {
+    "title": "Ultra-Fast Cloud Hosting",
+    "subtitle": "Start your website with the best hosting and domain services at unbeatable prices",
+    "cta": "Get Started",
+    "secondary_cta": "Learn More"
+  },
+  "features": {
+    "title": "Why Choose Us?",
+    "speed": {
+      "title": "Lightning Fast",
+      "description": "NVMe SSD servers with the latest technologies for optimal performance"
+    },
+    "support": {
+      "title": "24/7 Support",
+      "description": "Dedicated technical support team ready to help you around the clock"
+    },
+    "security": {
+      "title": "Advanced Security",
+      "description": "Free SSL certificates, DDoS protection, and advanced firewall"
+    },
+    "uptime": {
+      "title": "99.9% Uptime",
+      "description": "We guarantee your website uptime at 99.9%"
+    }
+  },
+  "domains": {
+    "title": "Find Your Perfect Domain",
+    "subtitle": "Register your domain now at the best prices",
+    "search_placeholder": "Search for a domain name...",
+    "search_button": "Search",
+    "popular": "Popular Domains",
+    "price_from": "Starting from",
+    "per_year": "/year",
+    "register": "Register Now",
+    "transfer": "Transfer Domain",
+    "whois": "WHOIS Lookup"
+  },
+  "pricing": {
+    "title": "Hosting Plans",
+    "subtitle": "Choose the plan that fits your needs",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "popular": "Most Popular",
+    "order_now": "Order Now",
+    "features": {
+      "storage": "Storage",
+      "bandwidth": "Bandwidth",
+      "domains": "Domains",
+      "emails": "Email Accounts",
+      "ssl": "SSL Certificate",
+      "backup": "Backup"
+    }
+  },
+  "footer": {
+    "company": "Company",
+    "about": "About Us",
+    "contact": "Contact Us",
+    "careers": "Careers",
+    "services": "Services",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "copyright": "All rights reserved"
+  },
+  "cta": {
+    "title": "Ready to Start Your Project?",
+    "subtitle": "Join thousands of happy customers and get reliable hosting",
+    "button": "Start Free"
+  }
+}
