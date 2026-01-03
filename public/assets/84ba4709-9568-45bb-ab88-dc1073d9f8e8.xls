@@ -1,0 +1,722 @@
+<html xmlns:x="urn:schemas-microsoft-com:office:excel"><head><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>Sheet1</x:Name><x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><style>td {mso-number-format:"@";/*force text*/}</style></head><body><table border='1px'><tbody><tr>
+                                    <th class="title">All Plan Features</th>
+                                                <th class="text-center">
+                                <span class="plan-title">Gen 103</span>
+                                <p class="price h4">$48.00 <span>/Y</span></p>
+                                <a href="https://app.progineous.com/store/shared-hosting/un-103" class="template-btn primary-btn btn-small">
+                                    Order Now                                </a>
+                            </th>
+                                                        <th class="text-center">
+                                <span class="plan-title">Gen 102</span>
+                                <p class="price h4">$63.60 <span>/Y</span></p>
+                                <a href="https://app.progineous.com/store/shared-hosting/un-102" class="template-btn primary-btn btn-small">
+                                    Order Now                                </a>
+                            </th>
+                                                        <th class="text-center">
+                                <span class="plan-title">Gen 101</span>
+                                <p class="price h4">$103.30 <span>/Y</span></p>
+                                <a href="https://app.progineous.com/store/shared-hosting/un-101" class="template-btn primary-btn btn-small">
+                                    Order Now                                </a>
+                            </th>
+                                        </tr>
+                                <tr>
+                        <td>Hosted Domains</td><td><strong>5</strong></td><td><strong>Unlimited </strong></td><td><strong>Unlimited </strong></td>                    </tr>
+                                        <tr>
+                        <td>Memory (RAM)</td><td><strong>4GB</strong></td><td><strong>8GB</strong></td><td><strong>12GB</strong></td>                    </tr>
+                                        <tr>
+                        <td>NVME Storage</td><td><strong>30GB</strong></td><td><strong>40GB</strong></td><td><strong>60GB</strong></td>                    </tr>
+                                        <tr>
+                        <td>CPU Cores - Gen 13</td><td><strong>2 Cores</strong></td><td><strong>4 Cores</strong></td><td><strong>8 Cores</strong></td>                    </tr>
+                                        <tr>
+                        <td>Bandwidth</td><td><strong>Unmetered</strong></td><td><strong>Unmetered</strong></td><td><strong>Unmetered</strong></td>                    </tr>
+                                        <tr>
+                        <td>Parked Domains</td><td><strong>Unlimited</strong></td><td><strong>Unlimited</strong></td><td><strong>Unlimited</strong></td>                    </tr>
+                                        <tr>
+                        <td>Free Domain Registration</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Subdomains</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Free SSL Certificate</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Cloudflare Integration</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Cache Manager</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>1-Click App Installer</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Daily Backups</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Backups</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Cloud Storage</td><td><strong>Included with UK datacenter</strong></td><td><strong>Included with UK datacenter</strong></td><td><strong>Included with UK datacenter and US datacenters</strong></td>                    </tr>
+                                        <tr>
+                        <td>cPanel (Control Panel)</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>99.9% Uptime Guarantee</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Website Builder</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>cPanel 2FA</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Dedicated IP</td><td>$4.00/mo</td><td>$4.00/mo</td><td>$4.00/mo</td>                    </tr>
+                                        <tr>
+                        <td>Free Apps</td><td>100+ apps with 1-click install</td><td>100+ apps with 1-click install</td><td>100+ apps with 1-click install</td>                    </tr>
+                                        <tr>
+                        <td>FTP Users</td><td>50</td><td>Unlimited</td><td>Unlimited</td>                    </tr>
+                                        <tr>
+                        <td>Money-Back Guarantee</td><td>30 days</td><td>30 days</td><td>30 days</td>                    </tr>
+                                        <tr>
+                        <td>Personal Nameservers</td><td>X</td><td>X</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Email Accounts</td><td>50</td><td>Unlimited</td><td>Unlimited</td>                    </tr>
+                                        <tr>
+                        <td>Email Forwarders</td><td>Unlimited</td><td>Unlimited</td><td>Unlimited</td>                    </tr>
+                                        <tr>
+                        <td>Email Autoresponders</td><td>Unlimited</td><td>Unlimited</td><td>Unlimited</td>                    </tr>
+                                        <tr>
+                        <td>Webmail</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>SMTP, POP3, IMAP</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>SpamAssassin</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Mailing Lists</td><td>15</td><td>Unlimited</td><td>Unlimited</td>                    </tr>
+                                        <tr>
+                        <td>Catch All Facility</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>SPF</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Domain Keys</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>BoxTrapper</td><td>X</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>CSV Import (Email &amp; Forwarders)</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Jellyfish Spam Protection</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>MySQL Databases</td><td>50</td><td>Unlimited</td><td>Unlimited</td>                    </tr>
+                                        <tr>
+                        <td>Disk Space</td><td>30GB</td><td>40GB</td><td>60GB</td>                    </tr>
+                                        <tr>
+                        <td>PHP MyAdmin</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>PostgreSQL Databases</td><td>X</td><td>Unlimited</td><td>Unlimited</td>                    </tr>
+                                        <tr>
+                        <td>PHP PgAdmin</td><td>X</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Webserver</td><td>Cloudlinux/Litespeed</td><td>Cloudlinux/Litespeed</td><td>Cloudlinux/Litespeed</td>                    </tr>
+                                        <tr>
+                        <td>PHP 5.X - 8.X</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Node.JS 6.X - 14.X</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Python 2.X - 3.X</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Ruby 1.X - 2.X</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>MariaDB 10.X.X</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>CGI</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Perl</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Javascript</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>SSI</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>SSH Access (Jailed)</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>eAccelerator</td><td>x</td><td>x</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>xCache</td><td>x</td><td>x</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Backup Manager</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Virus Scanner</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Image Manager</td><td>x</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Hotlink Protection</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>IP Deny Manager</td><td>x</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Index Manager</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Leech Protect</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Mailman List Manager</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>MIME Types Manager</td><td>x</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Network Tools</td><td>x</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>PGP/GPG</td><td>x</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Redirect Manager</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Simple CGI Wrapper</td><td>x</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Server Status Viewer</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Change Language</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Web Disk</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Directory Privacy</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Customizable php.ini</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Cron Jobs</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Simple DNS Zone Editor</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Advanced DNS Zone Editor</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Install PHP PEAR Packages</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Install Perl Modules</td><td>x</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Install Ruby Gems</td><td>x</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>SSL/TLS Manager</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>SSL Host Installer</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>AWStats</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Raw Logs Statistics</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Error Logs</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Bandwidth Stats</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Disk Usage Viewer</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Latest Visitors</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Resource Usage</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Google Analytics Compatible</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Softaculous Script Installer</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Blogs</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Portals/CMS</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Customer Support</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Discussion Boards</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>E-Commerce</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>FAQ</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Hosting Billing</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Image Galleries</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Polls and Surveys</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Project Management</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Site Builders</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Wiki</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>24/7 Live Chat</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>24/7 Help Desk</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Instant Setup</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                                        <tr>
+                        <td>Transfer Assistance</td><td>x</td>                            <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                        <td>
+                                <i class="fas fa-check"></i>                            </td>
+                                                </tr>
+                            </tbody></table></body></html>

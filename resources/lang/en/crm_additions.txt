@@ -1,0 +1,24 @@
+
+    // Free Domain Section
+    'free_domain' => 'Free Domain',
+    'free_domain_type' => 'Free Domain Type',
+    'free_domain_type_desc' => 'Select the type of free domain offer with this product',
+    'free_domain_none' => 'None',
+    'free_domain_reg_transfer' => 'Offer a free domain registration/transfer only',
+    'free_domain_reg_transfer_desc' => 'Domain is free on registration/transfer, renew as normal',
+    'free_domain_reg_transfer_renewal' => 'Offer a free domain registration/transfer and free renewal',
+    'free_domain_reg_transfer_renewal_desc' => 'Domain is free on registration/transfer and renewal (if product is renewed)',
+    'free_domain_payment_terms' => 'Free Domain Payment Terms',
+    'free_domain_payment_terms_desc' => 'Select which payment terms qualify for a free domain',
+    'free_domain_tlds' => 'Free Domain TLDs',
+    'free_domain_tlds_desc' => 'Select which domain extensions can be offered for free with this product',
+    'search_tlds' => 'Search TLDs...',
+    'select_all' => 'Select All',
+    'deselect_all' => 'Deselect All',
+    'selected' => 'selected',
+    'loading_tlds' => 'Loading TLDs...',
+    'error_loading_tlds' => 'Error loading TLDs',
+    'no_tlds_found' => 'No TLDs found',
+    'monthly' => 'Monthly',
+
+];
