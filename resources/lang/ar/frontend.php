@@ -40,6 +40,15 @@ return [
     'ultra_fast' => 'فائق السرعة',
     'full_security' => 'أمان كامل',
     'search' => 'بحث',
+    'domain_search_results' => 'نتائج البحث عن النطاق',
+    'searching' => 'جاري البحث',
+    'available_for_registration' => 'متاح للتسجيل',
+    'not_available' => 'غير متاح',
+    'add_to_cart' => 'أضف للسلة',
+    'add' => 'أضف',
+    'other_available_extensions' => 'امتدادات أخرى متاحة',
+    'search_error' => 'حدث خطأ أثناء البحث. يرجى المحاولة مرة أخرى.',
+    'search_another_domain' => 'ابحث عن دومين آخر...',
     
     // Hosting Plan Features
     'choose_hosting_plan' => 'اختر باقة الاستضافة المناسبة',

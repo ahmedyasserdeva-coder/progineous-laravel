@@ -41,6 +41,15 @@ return [
     'ultra_fast' => 'Ultra Fast',
     'full_security' => 'Full Security',
     'search' => 'Search',
+    'domain_search_results' => 'Domain Search Results',
+    'searching' => 'Searching',
+    'available_for_registration' => 'Available for registration',
+    'not_available' => 'Not available',
+    'add_to_cart' => 'Add to Cart',
+    'add' => 'Add',
+    'other_available_extensions' => 'Other available extensions',
+    'search_error' => 'An error occurred while searching. Please try again.',
+    'search_another_domain' => 'Search another domain...',
     
     // Hosting Plan Features
     'choose_hosting_plan' => 'Choose the Right Hosting Plan',

@@ -4,252 +4,217 @@
 @section('description', __('frontend.hero_subtitle'))
 
 @section('content')
-<!-- Hero Section with Domain Search -->
-<section class="relative pt-32 pb-24 overflow-hidden min-h-[85vh] flex items-center glass-hero-section">
-    <!-- Glass Background with Blue Tint -->
-    <div class="absolute inset-0 bg-gradient-to-br from-blue-50/80 via-cyan-50/70 to-slate-50/80 dark:from-blue-950/30 dark:via-cyan-950/20 dark:to-slate-950/30 backdrop-blur-3xl"></div>
+<!-- Domain Search Results Modal -->
+<div id="domainSearchResults" class="fixed inset-0 z-[100] pointer-events-none">
+    <!-- Backdrop -->
+    <div id="searchResultsBackdrop" class="absolute inset-0 bg-black/50 opacity-0 pointer-events-none" style="transition: opacity 1s ease-out;"></div>
     
-    <!-- Animated Background -->
+    <!-- Results Panel - slides from bottom to top -->
+    <div id="searchResultsPanel" class="absolute left-0 right-0 bg-white rounded-t-3xl shadow-2xl pointer-events-auto" style="top: 100%; height: calc(100vh - 60px); transition: top 1.2s cubic-bezier(0.16, 1, 0.3, 1);">
+        <!-- Header -->
+        <div class="sticky top-0 bg-white rounded-t-3xl border-b border-gray-100 px-6 py-4 z-10">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h3 class="text-lg font-bold text-gray-900">{{ __('frontend.domain_search_results') }}</h3>
+                    <p id="searchedDomainName" class="text-sm text-gray-500"></p>
+                </div>
+                <button id="closeSearchResults" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                    <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Search Another Domain -->
+            <form id="modalDomainSearchForm" class="flex items-center gap-2">
+                <div class="relative flex-1">
+                    <div class="absolute {{ app()->getLocale() == 'ar' ? 'right-4' : 'left-4' }} top-1/2 -translate-y-1/2 pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </div>
+                    <input 
+                        type="text" 
+                        id="modalDomainInput" 
+                        placeholder="{{ __('frontend.search_another_domain') }}" 
+                        class="w-full {{ app()->getLocale() == 'ar' ? 'pr-12 pl-4' : 'pl-12 pr-4' }} py-2.5 bg-gray-50 border border-gray-200 rounded-full text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                    >
+                </div>
+                <button 
+                    type="submit"
+                    class="px-5 py-2.5 bg-blue-500 hover:bg-blue-600 text-white font-medium text-sm rounded-full transition-all"
+                >
+                    {{ __('frontend.search') }}
+                </button>
+            </form>
+        </div>
+        
+        <!-- Loading State -->
+        <div id="searchResultsLoading" class="hidden p-8 text-center">
+            <div class="inline-block w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+            <p class="mt-4 text-gray-600">{{ __('frontend.searching') }}...</p>
+        </div>
+        
+        <!-- Results Content -->
+        <div id="searchResultsContent" class="overflow-y-auto p-6" style="max-height: calc(100vh - 250px);">
+            <!-- Results will be injected here -->
+        </div>
+    </div>
+</div>
+
+<!-- Sticky Domain Search Bar -->
+<div class="sticky top-0 z-50 bg-white shadow-sm py-3">
+    <div class="w-full flex flex-col md:flex-row items-center justify-between px-4 md:px-8 gap-3 md:gap-0">
+        <!-- Search Form - Far Left -->
+        <form id="stickyDomainSearchForm" class="flex items-center w-full md:w-auto">
+            @csrf
+            <div class="relative w-full md:w-[320px] lg:w-[400px] xl:w-[500px]">
+                <div class="absolute {{ app()->getLocale() == 'ar' ? 'right-4' : 'left-4' }} top-1/2 -translate-y-1/2 pointer-events-none">
+                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </div>
+                <input 
+                    type="text" 
+                    name="domain"
+                    id="stickyDomainInput" 
+                    placeholder="mybusiness.com" 
+                    class="w-full {{ app()->getLocale() == 'ar' ? 'pr-24 pl-4' : 'pl-12 pr-24' }} py-2.5 bg-white border border-gray-200 rounded-full text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                >
+                <button 
+                    type="submit"
+                    class="absolute {{ app()->getLocale() == 'ar' ? 'left-1' : 'right-1' }} top-1/2 -translate-y-1/2 px-4 py-1.5 bg-blue-500 hover:bg-blue-600 text-white font-medium text-sm rounded-full transition-all"
+                >
+                    {{ __('frontend.search') }}
+                </button>
+            </div>
+        </form>
+        
+        <!-- TLD Prices - Far Right -->
+        <div class="flex items-center gap-2 md:gap-3 flex-wrap justify-center lg:justify-end">
+            @php
+                // Default TLD prices if no featured domains in database
+                $defaultTlds = [
+                    ['tld' => 'com', 'price' => 13.06],
+                    ['tld' => 'net', 'price' => 15.02],
+                    ['tld' => 'org', 'price' => 12.64],
+                ];
+                $displayDomains = $featuredDomains->count() > 0 
+                    ? $featuredDomains->take(3)->map(fn($d) => ['tld' => $d->tld, 'price' => $d->progineous_register])
+                    : collect($defaultTlds);
+            @endphp
+            @foreach($displayDomains as $domain)
+                <div class="px-3 md:px-4 py-1.5 md:py-2 rounded-full text-xs md:text-sm bg-sky-50">
+                    <span class="text-sky-700">.{{ $domain['tld'] }}</span>
+                    <span class="text-sky-900 font-bold ml-1">${{ number_format($domain['price'], 2) }} USD</span>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+
+<!-- Hero Section - Dark Gradient Style -->
+<section class="relative min-h-[85vh] flex items-center overflow-hidden" style="background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 40%, #2d5a7b 70%, #3d7a9e 100%);">
+    <!-- Animated Stars/Dots Background -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <!-- Floating Glass Orbs -->
-        <div class="absolute top-0 {{ app()->getLocale() == 'ar' ? 'left-0' : 'right-0' }} w-96 h-96 bg-blue-400/20 dark:bg-blue-500/10 rounded-full blur-3xl animate-float"></div>
-        <div class="absolute bottom-0 {{ app()->getLocale() == 'ar' ? 'right-0' : 'left-0' }} w-[500px] h-[500px] bg-cyan-400/15 dark:bg-cyan-500/10 rounded-full blur-3xl animate-float animation-delay-2000"></div>
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-300/10 dark:bg-blue-600/5 rounded-full blur-3xl animate-pulse"></div>
+        <!-- Stars -->
+        <div class="absolute w-1 h-1 bg-white/40 rounded-full top-[10%] left-[10%] animate-pulse"></div>
+        <div class="absolute w-1.5 h-1.5 bg-white/30 rounded-full top-[15%] left-[25%] animate-pulse animation-delay-1000"></div>
+        <div class="absolute w-1 h-1 bg-white/50 rounded-full top-[8%] left-[45%] animate-pulse animation-delay-2000"></div>
+        <div class="absolute w-2 h-2 bg-white/20 rounded-full top-[20%] left-[60%] animate-pulse"></div>
+        <div class="absolute w-1 h-1 bg-white/40 rounded-full top-[12%] left-[80%] animate-pulse animation-delay-1000"></div>
+        <div class="absolute w-1.5 h-1.5 bg-white/30 rounded-full top-[30%] left-[15%] animate-pulse animation-delay-2000"></div>
+        <div class="absolute w-1 h-1 bg-white/50 rounded-full top-[40%] left-[5%] animate-pulse"></div>
+        <div class="absolute w-1 h-1 bg-white/40 rounded-full top-[50%] left-[90%] animate-pulse animation-delay-1000"></div>
+        <div class="absolute w-2 h-2 bg-white/20 rounded-full top-[60%] left-[75%] animate-pulse animation-delay-2000"></div>
+        <div class="absolute w-1 h-1 bg-white/30 rounded-full top-[70%] left-[20%] animate-pulse"></div>
         
-        <!-- Glass Shards Effect -->
-        <div class="absolute top-20 {{ app()->getLocale() == 'ar' ? 'right-20' : 'left-20' }} w-32 h-32 bg-blue-400/10 dark:bg-blue-500/5 rounded-2xl rotate-12 backdrop-blur-sm animate-float animation-delay-1000"></div>
-        <div class="absolute top-40 {{ app()->getLocale() == 'ar' ? 'left-40' : 'right-40' }} w-24 h-24 bg-cyan-400/10 dark:bg-cyan-500/5 rounded-2xl -rotate-12 backdrop-blur-sm animate-float"></div>
-        <div class="absolute bottom-40 {{ app()->getLocale() == 'ar' ? 'right-60' : 'left-60' }} w-28 h-28 bg-blue-300/10 dark:bg-blue-600/5 rounded-2xl rotate-45 backdrop-blur-sm animate-float animation-delay-2000"></div>
-        
-        <!-- Sparkle Dots -->
-        <div class="absolute top-20 {{ app()->getLocale() == 'ar' ? 'right-20' : 'left-20' }} w-2 h-2 bg-blue-400/60 dark:bg-blue-300/40 rounded-full animate-ping"></div>
-        <div class="absolute top-40 {{ app()->getLocale() == 'ar' ? 'left-40' : 'right-40' }} w-3 h-3 bg-cyan-400/60 dark:bg-cyan-300/40 rounded-full animate-ping animation-delay-1000"></div>
-        <div class="absolute bottom-40 {{ app()->getLocale() == 'ar' ? 'right-60' : 'left-60' }} w-2 h-2 bg-blue-300/60 dark:bg-blue-200/40 rounded-full animate-ping animation-delay-2000"></div>
+        <!-- Animated Circle on the Right -->
+        <div class="absolute {{ app()->getLocale() == 'ar' ? 'left-[10%]' : 'right-[10%]' }} top-1/2 -translate-y-1/2 w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96">
+            <div class="absolute inset-0 border-2 border-white/30 rounded-full animate-spin-slow"></div>
+            <div class="absolute inset-4 border border-white/20 rounded-full animate-spin-slow-reverse"></div>
+            <div class="absolute inset-8 border border-white/10 rounded-full animate-pulse"></div>
+        </div>
     </div>
 
-    <div class="container mx-auto px-4 relative z-10">
-        <div class="max-w-5xl mx-auto text-center">
-            <!-- Main Heading -->
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-slate-900 dark:text-white mb-6 leading-tight animate-fade-in-up drop-shadow-sm">
-                {{ __('frontend.find_your_perfect_domain') }}
-            </h1>
-            
-            <!-- Subtitle -->
-            <p class="text-xl md:text-2xl text-slate-700 dark:text-slate-300 mb-12 animate-fade-in-up animation-delay-200 font-medium drop-shadow-sm">
-                {{ __('frontend.domain_search_subtitle') }}
-            </p>
-
-            <!-- Domain Search Box -->
-            <div class="animate-fade-in-up animation-delay-400">
-                <div class="relative glass-card rounded-3xl shadow-2xl p-6 max-w-4xl mx-auto border border-white/20 dark:border-slate-700/50">
-                    <!-- Tabs -->
-                    <div x-data="{ activeTab: 'search' }" class="w-full">
-                        <!-- Tab Buttons -->
-                        <div class="flex gap-3 mb-6 p-2 bg-slate-100/50 dark:bg-slate-800/50 rounded-2xl backdrop-blur-sm">
-                            <button 
-                                @click="activeTab = 'search'"
-                                :class="activeTab === 'search' ? 'glass-button bg-gradient-to-r from-blue-600/90 to-cyan-600/90 text-white shadow-lg border border-white/30' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'"
-                                class="flex-1 px-6 py-4 rounded-xl font-bold text-lg transition-all duration-300 flex items-center justify-center gap-3"
-                            >
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+    <div class="container mx-auto px-4 relative z-10 py-20">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <!-- Content -->
+            <div class="{{ app()->getLocale() == 'ar' ? 'text-right' : 'text-left' }}">
+                <!-- Trust Badges -->
+                <div class="flex flex-wrap items-center gap-3 mb-8 {{ app()->getLocale() == 'ar' ? 'justify-end' : 'justify-start' }}">
+                    <div class="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
+                        <div class="flex">
+                            @for($i = 0; $i < 5; $i++)
+                                <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
                                 </svg>
-                                <span>{{ __('frontend.search_domain') }}</span>
-                            </button>
-                            <button 
-                                @click="activeTab = 'transfer'"
-                                :class="activeTab === 'transfer' ? 'glass-button bg-gradient-to-r from-blue-600/90 to-cyan-600/90 text-white shadow-lg border border-white/30' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'"
-                                class="flex-1 px-6 py-4 rounded-xl font-bold text-lg transition-all duration-300 flex items-center justify-center gap-3"
-                            >
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
-                                </svg>
-                                <span>{{ __('frontend.transfer_domain') }}</span>
-                            </button>
+                            @endfor
                         </div>
-
-                        <!-- Search Domain Form -->
-                        <div x-show="activeTab === 'search'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100">
-                            <form id="domainSearchForm" class="flex flex-col md:flex-row gap-3">
-                                @csrf
-                                <div class="flex-1 relative">
-                                    <div class="absolute {{ app()->getLocale() == 'ar' ? 'right-6' : 'left-6' }} top-1/2 -translate-y-1/2 pointer-events-none">
-                                        <svg class="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
-                                        </svg>
-                                    </div>
-                                    <input 
-                                        type="text" 
-                                        name="domain"
-                                        id="domainInput" 
-                                        placeholder="{{ __('frontend.enter_domain_name') }}" 
-                                        class="w-full {{ app()->getLocale() == 'ar' ? 'pr-14 pl-6' : 'pl-14 pr-6' }} py-5 bg-slate-50 dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 rounded-2xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent text-lg font-medium transition-all"
-                                        required
-                                    >
-                                </div>
-                                <button 
-                                    type="submit"
-                                    id="searchButton" 
-                                    class="group px-10 py-5 glass-button bg-gradient-to-r from-blue-600/90 to-cyan-600/90 hover:from-blue-700 hover:to-cyan-700 text-white font-bold text-lg rounded-2xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 whitespace-nowrap border border-white/30"
-                                >
-                                    <svg id="searchIcon" class="w-6 h-6 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                                    </svg>
-                                    <svg id="loadingIcon" class="w-6 h-6 animate-spin hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
-                                    </svg>
-                                    <span id="searchText">{{ __('frontend.search_now') }}</span>
-                                </button>
-                            </form>
-                            
-                            <!-- Search Results -->
-                            <div id="searchResults" class="mt-6 hidden"></div>
-                        </div>
-
-                        <!-- Transfer Domain Form -->
-                        <div x-show="activeTab === 'transfer'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100">
-                            <form id="domainTransferForm" class="space-y-4">
-                                @csrf
-                                <div class="flex flex-col md:flex-row gap-3">
-                                    <div class="flex-1 relative">
-                                        <div class="absolute {{ app()->getLocale() == 'ar' ? 'right-6' : 'left-6' }} top-1/2 -translate-y-1/2 pointer-events-none">
-                                            <svg class="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
-                                            </svg>
-                                        </div>
-                                        <input 
-                                            type="text" 
-                                            name="domain"
-                                            id="transferDomainInput"
-                                            placeholder="{{ __('frontend.enter_domain_to_transfer') }}" 
-                                            class="w-full {{ app()->getLocale() == 'ar' ? 'pr-14 pl-6' : 'pl-14 pr-6' }} py-5 bg-slate-50 dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 rounded-2xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent text-lg font-medium transition-all"
-                                            required
-                                        >
-                                    </div>
-                                    <div class="flex-1 relative">
-                                        <div class="absolute {{ app()->getLocale() == 'ar' ? 'right-6' : 'left-6' }} top-1/2 -translate-y-1/2 pointer-events-none">
-                                            <svg class="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
-                                            </svg>
-                                        </div>
-                                        <input 
-                                            type="text" 
-                                            name="auth_code"
-                                            id="authCodeInput"
-                                            placeholder="{{ __('frontend.enter_auth_code') }}" 
-                                            class="w-full {{ app()->getLocale() == 'ar' ? 'pr-14 pl-6' : 'pl-14 pr-6' }} py-5 bg-slate-50 dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 rounded-2xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent text-lg font-medium transition-all"
-                                            required
-                                        >
-                                    </div>
-                                </div>
-                                <button 
-                                    type="submit"
-                                    id="transferButton"
-                                    class="w-full group px-10 py-5 glass-button bg-gradient-to-r from-blue-600/90 to-cyan-600/90 hover:from-blue-700 hover:to-cyan-700 text-white font-bold text-lg rounded-2xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3"
-                                >
-                                    <svg id="transferIcon" class="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
-                                    </svg>
-                                    <svg id="transferLoadingIcon" class="w-6 h-6 animate-spin hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
-                                    </svg>
-                                    <span id="transferText">{{ __('frontend.start_transfer') }}</span>
-                                </button>
-                            </form>
-                            
-                            <!-- Transfer Results -->
-                            <div id="transferResults" class="mt-6 hidden"></div>
-                        </div>
+                        <span class="text-white text-sm font-medium">4.9/5 Trustpilot</span>
                     </div>
-                    
-                    
-                    <!-- Popular TLDs -->
-                    <div class="flex flex-wrap items-center justify-center gap-3 mt-6 px-3">
-                        <span class="text-sm text-slate-700 dark:text-slate-300 font-semibold">{{ __('frontend.popular_tlds') }}</span>
-                        <div class="flex flex-wrap gap-3 justify-center">
-                            @php
-                                $badgeClasses = [
-                                    'bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-900/30 dark:to-cyan-900/30 text-blue-600 dark:text-blue-300 border-blue-200 dark:border-blue-800/50 hover:from-blue-100 hover:to-cyan-100 dark:hover:from-blue-900/50 dark:hover:to-cyan-900/50',
-                                    'bg-gradient-to-r from-teal-50 to-emerald-50 dark:from-teal-900/30 dark:to-emerald-900/30 text-teal-600 dark:text-teal-300 border-teal-200 dark:border-teal-800/50 hover:from-teal-100 hover:to-emerald-100 dark:hover:from-teal-900/50 dark:hover:to-emerald-900/50',
-                                    'bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/30 dark:to-emerald-900/30 text-green-600 dark:text-green-300 border-green-200 dark:border-green-800/50 hover:from-green-100 hover:to-emerald-100 dark:hover:from-green-900/50 dark:hover:to-emerald-900/50',
-                                    'bg-gradient-to-r from-orange-50 to-yellow-50 dark:from-orange-900/30 dark:to-yellow-900/30 text-orange-600 dark:text-orange-300 border-orange-200 dark:border-orange-800/50 hover:from-orange-100 hover:to-yellow-100 dark:hover:from-orange-900/50 dark:hover:to-yellow-900/50',
-                                    'bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/30 dark:to-pink-900/30 text-purple-600 dark:text-purple-300 border-purple-200 dark:border-purple-800/50 hover:from-purple-100 hover:to-pink-100 dark:hover:from-purple-900/50 dark:hover:to-pink-900/50',
-                                    'bg-gradient-to-r from-rose-50 to-red-50 dark:from-rose-900/30 dark:to-red-900/30 text-rose-600 dark:text-rose-300 border-rose-200 dark:border-rose-800/50 hover:from-rose-100 hover:to-red-100 dark:hover:from-rose-900/50 dark:hover:to-red-900/50',
-                                    'bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-indigo-900/30 dark:to-blue-900/30 text-indigo-600 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800/50 hover:from-indigo-100 hover:to-blue-100 dark:hover:from-indigo-900/50 dark:hover:to-blue-900/50',
-                                    'bg-gradient-to-r from-lime-50 to-green-50 dark:from-lime-900/30 dark:to-green-900/30 text-lime-600 dark:text-lime-300 border-lime-200 dark:border-lime-800/50 hover:from-lime-100 hover:to-green-100 dark:hover:from-lime-900/50 dark:hover:to-green-900/50',
-                                ];
-                            @endphp
-                            
-                            @foreach($featuredDomains as $index => $domain)
-                                @php
-                                    $price = number_format($domain->progineous_register, 2);
-                                    $badgeClass = $badgeClasses[$index % count($badgeClasses)];
-                                @endphp
-                                <a href="#" onclick="document.getElementById('domainInput').value='{{ $domain->tld }}'; document.getElementById('domainSearchForm').requestSubmit(); return false;" 
-                                   class="group px-4 py-2 {{ $badgeClass }} rounded-xl text-sm font-bold border-2 transition-all hover:scale-105 hover:shadow-lg cursor-pointer">
-                                    <span class="flex items-center gap-2">
-                                        @if(app()->getLocale() == 'ar')
-                                            {{ $domain->tld }}.
-                                        @else
-                                            .{{ $domain->tld }}
-                                        @endif
-                                        <span class="text-xs opacity-70">${{ $price }}/y</span>
-                                    </span>
-                                </a>
-                            @endforeach
-                        </div>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
+                        <span class="text-white text-sm font-medium">+50,000 {{ __('frontend.happy_clients') }}</span>
                     </div>
                 </div>
+
+                <!-- Main Heading -->
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+                    <span class="text-blue-300">{{ __('frontend.hero_title_speed') }}</span><br>
+                    {{ __('frontend.hero_title_hosting') }}
+                </h1>
                 
-                <!-- Features Below Search -->
-                <div class="flex flex-wrap items-center justify-center gap-6 mt-8 text-slate-700 dark:text-slate-300">
-                    <div class="flex items-center gap-2">
-                        <div class="w-8 h-8 rounded-full glass-icon bg-blue-500/20 dark:bg-blue-400/20 backdrop-blur-sm flex items-center justify-center border border-blue-400/30">
-                            <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
-                            </svg>
-                        </div>
-                        <span class="font-semibold">{{ __('frontend.free_whois_privacy') }}</span>
+                <!-- Subtitle -->
+                <p class="text-lg md:text-xl text-white/80 mb-8 max-w-xl">
+                    {{ __('frontend.hero_subtitle_new') }}
+                </p>
+
+                <!-- Features -->
+                <div class="flex flex-wrap items-center gap-6 mb-10 {{ app()->getLocale() == 'ar' ? 'justify-end' : 'justify-start' }}">
+                    <div class="flex items-center gap-2 text-white/80">
+                        <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                        <span class="text-sm font-medium">{{ __('frontend.ultra_fast') }}</span>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <div class="w-8 h-8 rounded-full glass-icon bg-cyan-500/20 dark:bg-cyan-400/20 backdrop-blur-sm flex items-center justify-center border border-cyan-400/30">
-                            <svg class="w-5 h-5 text-cyan-600 dark:text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
-                            </svg>
-                        </div>
-                        <span class="font-semibold">{{ __('frontend.easy_dns_management') }}</span>
+                    <div class="flex items-center gap-2 text-white/80">
+                        <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                        <span class="text-sm font-medium">{{ __('frontend.full_security') }}</span>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <div class="w-8 h-8 rounded-full glass-icon bg-blue-500/20 dark:bg-blue-400/20 backdrop-blur-sm flex items-center justify-center border border-blue-400/30">
-                            <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
-                            </svg>
-                        </div>
-                        <span class="font-semibold">{{ __('frontend.instant_activation') }}</span>
+                    <div class="flex items-center gap-2 text-white/80">
+                        <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span class="text-sm font-medium">{{ __('frontend.support_247') }}</span>
                     </div>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-wrap items-center gap-4 {{ app()->getLocale() == 'ar' ? 'justify-end' : 'justify-start' }}">
+                    <a href="{{ route('hosting.shared') }}" class="group inline-flex items-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-all shadow-lg hover:shadow-xl">
+                        {{ __('frontend.start_now') }} $2
+                        <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform {{ app()->getLocale() == 'ar' ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                        </svg>
+                    </a>
+                    <a href="#hosting-plans" class="inline-flex items-center gap-2 px-8 py-4 bg-transparent border-2 border-white/30 hover:border-white/50 text-white font-semibold rounded-full transition-all">
+                        {{ __('frontend.view_plans') }}
+                    </a>
                 </div>
             </div>
 
-            <!-- Stats -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 animate-fade-in-up animation-delay-600">
-                <div class="text-center glass-stat p-6 rounded-2xl backdrop-blur-sm border border-white/20 dark:border-slate-700/30">
-                    <div class="text-5xl font-black text-blue-600 dark:text-blue-400 mb-2">500+</div>
-                    <div class="text-slate-700 dark:text-slate-300 font-semibold">{{ __('frontend.domain_extensions') }}</div>
-                </div>
-                <div class="text-center glass-stat p-6 rounded-2xl backdrop-blur-sm border border-white/20 dark:border-slate-700/30">
-                    <div class="text-5xl font-black text-cyan-600 dark:text-cyan-400 mb-2">10K+</div>
-                    <div class="text-slate-700 dark:text-slate-300 font-semibold">{{ __('frontend.registered_domains') }}</div>
-                </div>
-                <div class="text-center glass-stat p-6 rounded-2xl backdrop-blur-sm border border-white/20 dark:border-slate-700/30">
-                    <div class="text-5xl font-black text-blue-600 dark:text-blue-400 mb-2">24/7</div>
-                    <div class="text-slate-700 dark:text-slate-300 font-semibold">{{ __('frontend.expert_support') }}</div>
-                </div>
-                <div class="text-center glass-stat p-6 rounded-2xl backdrop-blur-sm border border-white/20 dark:border-slate-700/30">
-                    <div class="text-5xl font-black text-cyan-600 dark:text-cyan-400 mb-2">99.9%</div>
-                    <div class="text-slate-700 dark:text-slate-300 font-semibold">{{ __('frontend.uptime_guarantee') }}</div>
-                </div>
-            </div>
+            <!-- Right Side - Empty for the Circle Animation -->
+            <div class="hidden lg:block"></div>
         </div>
+    </div>
+
+    <!-- Wave Bottom -->
+    <div class="absolute bottom-0 left-0 right-0">
+        <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full">
+            <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="white" class="dark:fill-slate-900"/>
+        </svg>
     </div>
 </section>
 
@@ -990,23 +955,25 @@
 
 @push('styles')
 <style>
-    /* Glass Morphism Hero Section */
-    .glass-hero-section {
-        position: relative;
-        background: linear-gradient(135deg, 
-            rgba(239, 246, 255, 0.6) 0%,
-            rgba(224, 242, 254, 0.5) 50%,
-            rgba(241, 245, 249, 0.6) 100%
-        );
+    /* Slow Spin Animation for Hero Circle */
+    @keyframes spin-slow {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+    @keyframes spin-slow-reverse {
+        from { transform: rotate(360deg); }
+        to { transform: rotate(0deg); }
+    }
+    .animate-spin-slow {
+        animation: spin-slow 20s linear infinite;
+    }
+    .animate-spin-slow-reverse {
+        animation: spin-slow-reverse 15s linear infinite;
     }
     
-    .dark .glass-hero-section {
-        background: linear-gradient(135deg, 
-            rgba(30, 58, 138, 0.15) 0%,
-            rgba(8, 47, 73, 0.12) 50%,
-            rgba(15, 23, 42, 0.15) 100%
-        );
-    }
+    /* Animation Delays */
+    .animation-delay-1000 { animation-delay: 1s; }
+    .animation-delay-2000 { animation-delay: 2s; }
     
     /* Glass Card Effect */
     .glass-card {
@@ -1213,7 +1180,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const isRTL = '{{ app()->getLocale() }}' === 'ar';
     
-    // Domain Search Handler
+    // Domain Search Handler - only if form exists
+    if (searchForm) {
     searchForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
@@ -1536,6 +1504,274 @@ function addToCart(domain, price) {
     alert(`Adding ${domain} to cart for ${price}`);
     console.log('Add to cart:', { domain, price });
 }
+
+// Typewriter effect for domain search input
+document.addEventListener('DOMContentLoaded', function() {
+    const input = document.getElementById('stickyDomainInput');
+    
+    // Exit if input doesn't exist
+    if (!input) return;
+    
+    const examples = ['mybusiness.com', 'yourcompany.net', 'startup.org', 'portfolio.io', 'shop.store'];
+    let exampleIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let isUserTyping = false;
+    
+    // Stop animation when user focuses on input
+    input.addEventListener('focus', function() {
+        isUserTyping = true;
+        input.placeholder = '';
+    });
+    
+    // Resume animation when user leaves input empty
+    input.addEventListener('blur', function() {
+        if (input.value === '') {
+            isUserTyping = false;
+            charIndex = 0;
+            isDeleting = false;
+            typeWriter();
+        }
+    });
+    
+    function typeWriter() {
+        if (isUserTyping) return;
+        
+        const currentExample = examples[exampleIndex];
+        
+        if (isDeleting) {
+            // Deleting
+            input.placeholder = currentExample.substring(0, charIndex - 1);
+            charIndex--;
+            
+            if (charIndex === 0) {
+                isDeleting = false;
+                exampleIndex = (exampleIndex + 1) % examples.length;
+                setTimeout(typeWriter, 400); // Pause before typing next
+                return;
+            }
+            setTimeout(typeWriter, 80); // Delete speed
+        } else {
+            // Typing
+            input.placeholder = currentExample.substring(0, charIndex + 1);
+            charIndex++;
+            
+            if (charIndex === currentExample.length) {
+                isDeleting = true;
+                setTimeout(typeWriter, 1500); // Pause at end before deleting
+                return;
+            }
+            setTimeout(typeWriter, 120); // Typing speed
+        }
+    }
+    
+    // Start the typewriter effect
+    typeWriter();
+});
+
+// Domain Search Results Modal Functions - wrap in DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function() {
+    const searchResultsModal = document.getElementById('domainSearchResults');
+    const searchResultsBackdrop = document.getElementById('searchResultsBackdrop');
+    const searchResultsPanel = document.getElementById('searchResultsPanel');
+    const searchResultsLoading = document.getElementById('searchResultsLoading');
+    const searchResultsContent = document.getElementById('searchResultsContent');
+    const searchedDomainName = document.getElementById('searchedDomainName');
+    const closeSearchResultsBtn = document.getElementById('closeSearchResults');
+    
+    // Check if modal elements exist
+    if (!searchResultsModal) return;
+
+    function openSearchResults() {
+        // Enable pointer events on modal
+        searchResultsModal.style.pointerEvents = 'auto';
+        searchResultsBackdrop.style.pointerEvents = 'auto';
+        
+        // Trigger animation after a small delay
+        setTimeout(() => {
+            searchResultsBackdrop.classList.remove('opacity-0');
+            searchResultsBackdrop.classList.add('opacity-100');
+            // Slide panel from bottom (100%) to top (60px)
+            searchResultsPanel.style.top = '60px';
+        }, 10);
+        document.body.style.overflow = 'hidden';
+    }
+
+function closeSearchResults() {
+    searchResultsBackdrop.classList.remove('opacity-100');
+    searchResultsBackdrop.classList.add('opacity-0');
+    // Slide panel back down
+    searchResultsPanel.style.top = '100%';
+    
+    setTimeout(() => {
+        searchResultsModal.style.pointerEvents = 'none';
+        searchResultsBackdrop.style.pointerEvents = 'none';
+    }, 700);
+    document.body.style.overflow = '';
+}
+
+// Close on backdrop click
+searchResultsBackdrop?.addEventListener('click', closeSearchResults);
+closeSearchResultsBtn?.addEventListener('click', closeSearchResults);
+
+// Close on Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && searchResultsPanel.style.top === '60px') {
+        closeSearchResults();
+    }
+});
+
+// Shared function to search domain
+async function searchDomain(domain) {
+    if (!domain) return;
+    
+    // Update the modal input with searched domain
+    const modalInput = document.getElementById('modalDomainInput');
+    if (modalInput) modalInput.value = domain;
+    
+    // Show modal with loading
+    searchedDomainName.textContent = domain;
+    searchResultsLoading.classList.remove('hidden');
+    searchResultsContent.innerHTML = '';
+    openSearchResults();
+    
+    try {
+        // Make API call to check domain availability
+        const response = await fetch('{{ route("domains.check") }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || '',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({ domain: domain })
+        });
+        
+        const data = await response.json();
+        
+        // Hide loading
+        searchResultsLoading.classList.add('hidden');
+        
+        // Display results
+        displayDomainResults(domain, data);
+        
+    } catch (error) {
+        console.error('Search error:', error);
+        searchResultsLoading.classList.add('hidden');
+        searchResultsContent.innerHTML = `
+            <div class="text-center py-8">
+                <svg class="w-16 h-16 mx-auto text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <p class="mt-4 text-gray-600">{{ __('frontend.search_error') }}</p>
+            </div>
+        `;
+    }
+}
+
+// Handle sticky domain search form submit
+document.getElementById('stickyDomainSearchForm')?.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const domainInput = document.getElementById('stickyDomainInput');
+    searchDomain(domainInput.value.trim());
+});
+
+// Handle modal domain search form submit
+document.getElementById('modalDomainSearchForm')?.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const domainInput = document.getElementById('modalDomainInput');
+    searchDomain(domainInput.value.trim());
+});
+
+function displayDomainResults(searchedDomain, data) {
+    // Parse domain name and extension
+    const parts = searchedDomain.split('.');
+    const name = parts[0];
+    const searchedTld = parts.length > 1 ? parts.slice(1).join('.') : 'com';
+    
+    // Translation strings
+    const translations = {
+        available: '{{ __("frontend.available_for_registration") }}',
+        notAvailable: '{{ __("frontend.not_available") }}',
+        addToCart: '{{ __("frontend.add_to_cart") }}',
+        add: '{{ __("frontend.add") }}',
+        otherExtensions: '{{ __("frontend.other_available_extensions") }}'
+    };
+    
+    let html = '<div class="space-y-4">';
+    
+    // Main domain result
+    const isAvailable = data.available !== false;
+    html += `
+        <div class="p-4 rounded-xl border-2 ${isAvailable ? 'border-green-200 bg-green-50' : 'border-red-200 bg-red-50'}">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <span class="w-10 h-10 rounded-full flex items-center justify-center ${isAvailable ? 'bg-green-500' : 'bg-red-500'}">
+                        ${isAvailable ? 
+                            '<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>' :
+                            '<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>'
+                        }
+                    </span>
+                    <div>
+                        <p class="font-bold text-lg text-gray-900">${name}.${searchedTld}</p>
+                        <p class="text-sm ${isAvailable ? 'text-green-600' : 'text-red-600'}">${isAvailable ? translations.available : translations.notAvailable}</p>
+                    </div>
+                </div>
+                ${isAvailable ? `
+                    <div class="text-right">
+                        <p class="text-2xl font-bold text-gray-900">$${data.price || '12.99'}</p>
+                        <button onclick="addToCart('${name}.${searchedTld}', '${data.price || '12.99'}')" class="mt-2 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-sm font-medium transition-colors">
+                            ${translations.addToCart}
+                        </button>
+                    </div>
+                ` : ''}
+            </div>
+        </div>
+    `;
+    
+    // Suggestions with other TLDs
+    const suggestions = data.suggestions || [
+        { tld: 'net', price: '14.99', available: true },
+        { tld: 'org', price: '12.99', available: true },
+        { tld: 'io', price: '39.99', available: true },
+        { tld: 'co', price: '29.99', available: true },
+    ];
+    
+    if (suggestions.length > 0) {
+        html += `
+            <div class="mt-6">
+                <h4 class="text-sm font-semibold text-gray-500 uppercase mb-3">${translations.otherExtensions}</h4>
+                <div class="grid gap-3">
+        `;
+        
+        suggestions.forEach(s => {
+            if (s.available !== false) {
+                html += `
+                    <div class="p-3 rounded-lg border border-gray-200 bg-white hover:border-blue-300 hover:shadow-sm transition-all flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
+                                <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            </span>
+                            <span class="font-medium text-gray-900">${name}.${s.tld}</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <span class="font-bold text-gray-900">$${s.price}</span>
+                            <button onclick="addToCart('${name}.${s.tld}', '${s.price}')" class="px-4 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-sm font-medium transition-colors">
+                                ${translations.add}
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+        });
+        
+        html += '</div></div>';
+    }
+    
+    html += '</div>';
+    searchResultsContent.innerHTML = html;
+}
+}); // End of DOMContentLoaded for modal
 </script>
 @endpush
 @endsection
