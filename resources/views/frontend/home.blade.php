@@ -253,6 +253,235 @@
     </div>
 </section>
 
+<!-- Hosting Plans Section - Like Next.js Design -->
+<section id="hosting-plans" class="py-16 lg:py-20 bg-white dark:bg-slate-900 overflow-hidden">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Header -->
+        <div class="text-center mb-12">
+            <h2 class="text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white">
+                {{ __('frontend.choose_hosting_plan') }}
+            </h2>
+            <p class="mt-3 text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+                {{ __('frontend.hosting_plans_description') }}
+            </p>
+        </div>
+
+        <!-- Hosting Plans Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+            
+            <!-- Shared Hosting -->
+            <a href="{{ route('hosting.shared') }}" class="group relative rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-slate-100 dark:border-slate-700">
+                <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 shadow-lg">
+                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"/>
+                    </svg>
+                </div>
+                <h3 class="mt-4 text-lg font-bold text-slate-900 dark:text-white">{{ __('frontend.shared_hosting') }}</h3>
+                <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">{{ __('frontend.shared_hosting_desc') }}</p>
+                <div class="mt-4">
+                    <span class="text-xs text-slate-500 dark:text-slate-500">{{ __('frontend.starting_at') }}</span>
+                    <div class="flex items-baseline gap-0.5">
+                        <span class="text-3xl font-bold text-slate-900 dark:text-white">$2</span>
+                        <span class="text-sm text-slate-500 dark:text-slate-500">/{{ __('frontend.month') }}</span>
+                    </div>
+                </div>
+                <ul class="mt-4 space-y-2">
+                    <li class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
+                        <span class="h-1 w-1 rounded-full bg-blue-600"></span>{{ __('frontend.unlimited_ssd') }}
+                    </li>
+                    <li class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
+                        <span class="h-1 w-1 rounded-full bg-blue-600"></span>{{ __('frontend.free_ssl') }}
+                    </li>
+                    <li class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
+                        <span class="h-1 w-1 rounded-full bg-blue-600"></span>{{ __('frontend.unlimited_bandwidth') }}
+                    </li>
+                </ul>
+                <div class="mt-4 flex items-center gap-1 text-blue-600 dark:text-blue-400 font-medium text-sm group-hover:gap-2 transition-all">
+                    {{ __('frontend.learn_more') }}
+                    <svg class="h-4 w-4 {{ app()->getLocale() == 'ar' ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </div>
+            </a>
+
+            <!-- Cloud Hosting -->
+            <a href="{{ route('hosting.cloud') }}" class="group relative rounded-2xl bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-slate-100 dark:border-slate-700">
+                <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-purple-600 shadow-lg">
+                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+                    </svg>
+                </div>
+                <h3 class="mt-4 text-lg font-bold text-slate-900 dark:text-white">{{ __('frontend.cloud_hosting') }}</h3>
+                <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">{{ __('frontend.cloud_hosting_desc') }}</p>
+                <div class="mt-4">
+                    <span class="text-xs text-slate-500 dark:text-slate-500">{{ __('frontend.starting_at') }}</span>
+                    <div class="flex items-baseline gap-0.5">
+                        <span class="text-3xl font-bold text-slate-900 dark:text-white">$4</span>
+                        <span class="text-sm text-slate-500 dark:text-slate-500">/{{ __('frontend.month') }}</span>
+                    </div>
+                </div>
+                <ul class="mt-4 space-y-2">
+                    <li class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
+                        <span class="h-1 w-1 rounded-full bg-purple-600"></span>{{ __('frontend.dedicated_resources') }}
+                    </li>
+                    <li class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
+                        <span class="h-1 w-1 rounded-full bg-purple-600"></span>{{ __('frontend.auto_scaling') }}
+                    </li>
+                    <li class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
+                        <span class="h-1 w-1 rounded-full bg-purple-600"></span>{{ __('frontend.daily_backups') }}
+                    </li>
+                </ul>
+                <div class="mt-4 flex items-center gap-1 text-purple-600 dark:text-purple-400 font-medium text-sm group-hover:gap-2 transition-all">
+                    {{ __('frontend.learn_more') }}
+                    <svg class="h-4 w-4 {{ app()->getLocale() == 'ar' ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </div>
+            </a>
+
+            <!-- Reseller Hosting -->
+            <a href="{{ route('hosting.reseller') }}" class="group relative rounded-2xl bg-gradient-to-br from-cyan-50 to-cyan-100 dark:from-cyan-900/20 dark:to-cyan-800/20 p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-slate-100 dark:border-slate-700">
+                <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-600 shadow-lg">
+                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                    </svg>
+                </div>
+                <h3 class="mt-4 text-lg font-bold text-slate-900 dark:text-white">{{ __('frontend.reseller_hosting') }}</h3>
+                <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">{{ __('frontend.reseller_hosting_desc') }}</p>
+                <div class="mt-4">
+                    <span class="text-xs text-slate-500 dark:text-slate-500">{{ __('frontend.starting_at') }}</span>
+                    <div class="flex items-baseline gap-0.5">
+                        <span class="text-3xl font-bold text-slate-900 dark:text-white">$20</span>
+                        <span class="text-sm text-slate-500 dark:text-slate-500">/{{ __('frontend.month') }}</span>
+                    </div>
+                </div>
+                <ul class="mt-4 space-y-2">
+                    <li class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
+                        <span class="h-1 w-1 rounded-full bg-cyan-600"></span>{{ __('frontend.free_whm') }}
+                    </li>
+                    <li class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
+                        <span class="h-1 w-1 rounded-full bg-cyan-600"></span>{{ __('frontend.white_label') }}
+                    </li>
+                    <li class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
+                        <span class="h-1 w-1 rounded-full bg-cyan-600"></span>{{ __('frontend.unlimited_accounts') }}
+                    </li>
+                </ul>
+                <div class="mt-4 flex items-center gap-1 text-cyan-600 dark:text-cyan-400 font-medium text-sm group-hover:gap-2 transition-all">
+                    {{ __('frontend.learn_more') }}
+                    <svg class="h-4 w-4 {{ app()->getLocale() == 'ar' ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </div>
+            </a>
+
+            <!-- VPS Hosting -->
+            <a href="{{ route('hosting.vps') }}" class="group relative rounded-2xl bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-900/20 dark:to-emerald-800/20 p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-slate-100 dark:border-slate-700">
+                <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-600 shadow-lg">
+                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/>
+                    </svg>
+                </div>
+                <h3 class="mt-4 text-lg font-bold text-slate-900 dark:text-white">{{ __('frontend.vps_hosting') }}</h3>
+                <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">{{ __('frontend.vps_hosting_desc') }}</p>
+                <div class="mt-4">
+                    <span class="text-xs text-slate-500 dark:text-slate-500">{{ __('frontend.starting_at') }}</span>
+                    <div class="flex items-baseline gap-0.5">
+                        <span class="text-3xl font-bold text-slate-900 dark:text-white">$14.99</span>
+                        <span class="text-sm text-slate-500 dark:text-slate-500">/{{ __('frontend.month') }}</span>
+                    </div>
+                </div>
+                <ul class="mt-4 space-y-2">
+                    <li class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
+                        <span class="h-1 w-1 rounded-full bg-emerald-600"></span>{{ __('frontend.full_root_access') }}
+                    </li>
+                    <li class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
+                        <span class="h-1 w-1 rounded-full bg-emerald-600"></span>{{ __('frontend.choice_of_os') }}
+                    </li>
+                    <li class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
+                        <span class="h-1 w-1 rounded-full bg-emerald-600"></span>{{ __('frontend.dedicated_ip') }}
+                    </li>
+                </ul>
+                <div class="mt-4 flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-medium text-sm group-hover:gap-2 transition-all">
+                    {{ __('frontend.learn_more') }}
+                    <svg class="h-4 w-4 {{ app()->getLocale() == 'ar' ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </div>
+            </a>
+
+            <!-- Dedicated Servers -->
+            <a href="{{ route('hosting.dedicated') }}" class="group relative rounded-2xl bg-gradient-to-br from-amber-50 to-amber-100 dark:from-amber-900/20 dark:to-amber-800/20 p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-slate-100 dark:border-slate-700">
+                <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-amber-600 shadow-lg">
+                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                    </svg>
+                </div>
+                <h3 class="mt-4 text-lg font-bold text-slate-900 dark:text-white">{{ __('frontend.dedicated_servers') }}</h3>
+                <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">{{ __('frontend.dedicated_servers_desc') }}</p>
+                <div class="mt-4">
+                    <span class="text-xs text-slate-500 dark:text-slate-500">{{ __('frontend.starting_at') }}</span>
+                    <div class="flex items-baseline gap-0.5">
+                        <span class="text-3xl font-bold text-slate-900 dark:text-white">$140</span>
+                        <span class="text-sm text-slate-500 dark:text-slate-500">/{{ __('frontend.month') }}</span>
+                    </div>
+                </div>
+                <ul class="mt-4 space-y-2">
+                    <li class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
+                        <span class="h-1 w-1 rounded-full bg-amber-600"></span>{{ __('frontend.entire_server') }}
+                    </li>
+                    <li class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
+                        <span class="h-1 w-1 rounded-full bg-amber-600"></span>{{ __('frontend.ultra_fast_performance') }}
+                    </li>
+                    <li class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
+                        <span class="h-1 w-1 rounded-full bg-amber-600"></span>{{ __('frontend.expert_support') }}
+                    </li>
+                </ul>
+                <div class="mt-4 flex items-center gap-1 text-amber-600 dark:text-amber-400 font-medium text-sm group-hover:gap-2 transition-all">
+                    {{ __('frontend.learn_more') }}
+                    <svg class="h-4 w-4 {{ app()->getLocale() == 'ar' ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </div>
+            </a>
+
+            <!-- Migrate Now -->
+            <a href="{{ route('hosting.shared') }}?migrate=1" class="group relative rounded-2xl bg-gradient-to-br from-rose-50 to-rose-100 dark:from-rose-900/20 dark:to-rose-800/20 p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-slate-100 dark:border-slate-700">
+                <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-rose-600 shadow-lg">
+                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+                    </svg>
+                </div>
+                <h3 class="mt-4 text-lg font-bold text-slate-900 dark:text-white">{{ __('frontend.migrate_now') }}</h3>
+                <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">{{ __('frontend.migrate_now_desc') }}</p>
+                <div class="mt-4">
+                    <div class="flex items-baseline gap-0.5">
+                        <span class="text-3xl font-bold text-rose-600 dark:text-rose-400">{{ __('frontend.free') }}</span>
+                    </div>
+                </div>
+                <ul class="mt-4 space-y-2">
+                    <li class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
+                        <span class="h-1 w-1 rounded-full bg-rose-600"></span>{{ __('frontend.zero_downtime') }}
+                    </li>
+                    <li class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
+                        <span class="h-1 w-1 rounded-full bg-rose-600"></span>{{ __('frontend.expert_team') }}
+                    </li>
+                    <li class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
+                        <span class="h-1 w-1 rounded-full bg-rose-600"></span>{{ __('frontend.money_back_guarantee') }}
+                    </li>
+                </ul>
+                <div class="mt-4 flex items-center gap-1 text-rose-600 dark:text-rose-400 font-medium text-sm group-hover:gap-2 transition-all">
+                    {{ __('frontend.learn_more') }}
+                    <svg class="h-4 w-4 {{ app()->getLocale() == 'ar' ? 'rotate-180' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</section>
+
 <!-- Why Choose Online Section -->
 <section class="py-20 bg-gradient-to-br from-slate-50 via-blue-50 to-cyan-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 relative overflow-hidden">
     <!-- Background Pattern -->
