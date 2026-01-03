@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Blade;
 use App\Helpers\ArabicHelper;
 use Illuminate\Mail\Events\MessageSent;
 use App\Listeners\LogSentEmail;
-use Laravel\Mcp\Facades\Mcp;
-use App\Mcp\Servers\LaravelServer;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,8 +26,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Register MCP Server
-        Mcp::local('LaravelServer', LaravelServer::class);
+        // Register MCP Server (only if class exists - for local development)
+        if (class_exists(\Laravel\Mcp\Facades\Mcp::class)) {
+            \Laravel\Mcp\Facades\Mcp::local('LaravelServer', \App\Mcp\Servers\LaravelServer::class);
+        }
 
         // Register view composer for payment methods
         View::composer([
